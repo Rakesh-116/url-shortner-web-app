@@ -22,3 +22,6 @@ yarn-debug.log*
 yarn-error.log*
 /public/tinymce/
 .env.env
+
+
+/backend/.env
