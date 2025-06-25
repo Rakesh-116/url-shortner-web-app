@@ -32,8 +32,8 @@ import userRouter from "./routes/userRouter.js";
 import authRouter from "./routes/authRouter.js";
 import shortURLRouter from "./routes/shortURLRouter.js";
 
-app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/user", userRouter);
 app.use("/api/url", shortURLRouter);
 
 app.use(express.static(path.join(__dirname, "../../frontend/dist")));
