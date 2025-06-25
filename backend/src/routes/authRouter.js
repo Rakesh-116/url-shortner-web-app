@@ -1,7 +1,8 @@
 import { Router } from "express";
-import { loginWithGoogle } from "../controllers/authController.js";
+import { loginWithGoogleController } from "../controllers/authController.js";
 
 const authRouter = Router();
 
+authRouter.route("/google").post(loginWithGoogleController);
 
 export default authRouter;
