@@ -60,7 +60,7 @@ const Navbar = () => {
             variant="outline"
             c={"white"}
             style={{ borderColor: "white" }}
-            onClick={() => navigate("/urlShortener")}
+            onClick={() => navigate("/url/shortener")}
           >
             Shorten URL
           </Button>

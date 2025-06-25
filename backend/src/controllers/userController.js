@@ -28,4 +28,6 @@ const getUserProfileController = async (req, res) => {
   }
 };
 
-export { getUserProfileController };
+const getAllUserURLsController = async (req, res) => {};
+
+export { getUserProfileController, getAllUserURLsController };

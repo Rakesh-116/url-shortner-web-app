@@ -36,27 +36,35 @@ const URLShortener = () => {
       expiresAt: expiryDate,
       title,
     });
-    return response;
+    console.log("Response from server:", response);
+    return response.data;
   };
+
   const { mutate } = useMutation({
     mutationFn: getData,
     onSuccess: (data) => {
+      console.log("Mutation success data:", data);
+      // Clear form fields
       setTitle("");
       setOriginalURL("");
       setExpiryDate("");
+
+      // Set the short URL
+      const fullShortURL = `${service.getBaseURL()}/api/url/${data.shortURL}`;
+      setShortURL(fullShortURL);
+
       showNotification({
         title: "Success",
         message: "Short URL Generated",
         color: "green",
       });
-      console.log(data);
-      setShortURL(`${service.getBaseURL()}/api/s/${data.shortCode}`);
     },
     onError: (error) => {
-      console.error(error);
+      console.error("Error generating URL:", error);
       showNotification({
         title: "Error",
-        message: error.message ?? "Some Error Occurred",
+        message:
+          error?.response?.data?.message || "Failed to generate short URL",
         color: "red",
       });
     },
@@ -138,7 +146,7 @@ const URLShortener = () => {
           justifyContent: "flex-start",
         }}
       >
-        {shortURL && shortURL.length > 0 ? (
+        {shortURL ? (
           <>
             <Text
               style={{ borderRadius: "10px" }}
@@ -216,7 +224,6 @@ const URLShortener = () => {
           </>
         ) : (
           <>
-            `{" "}
             <TextInput
               placeholder="Title of URL"
               w={400}
@@ -253,9 +260,8 @@ const URLShortener = () => {
               radius={"md"}
               onClick={validateAndGenerateURL}
             >
-              Generate And Shorten URL
+              Generate And Shorten URL{" "}
             </Button>
-            `
           </>
         )}
       </Center>

@@ -3,7 +3,9 @@ import { nanoid } from "nanoid";
 import ShortURL from "../models/shorturl.model.js";
 
 const generateShortURLController = async (req, res) => {
-  const longURL = req.body.url;
+  console.log(req.body);
+
+  const longURL = req.body.originalUrl;
 
   if (!longURL) {
     console.error("Long URL not provided in the request body.");
@@ -27,7 +29,7 @@ const generateShortURLController = async (req, res) => {
     status: "success",
     message: "Short URL generated successfully",
     data: {
-      shortURL: `${req.protocol}://${req.get("host")}/api/url/${shortURL}`,
+      shortURL: shortURL,
       longURL: longURL,
     },
   });
@@ -64,10 +66,4 @@ const getShortURLController = async (req, res) => {
   }
 };
 
-const getAllShortURLsController = async (req, res) => {};
-
-export {
-  generateShortURLController,
-  getShortURLController,
-  getAllShortURLsController,
-};
+export { generateShortURLController, getShortURLController };
